@@ -1,0 +1,20 @@
+header {
+    background: lightgray;
+    color: black;
+}
+.main {
+    background:white;
+    color: black;
+}
+.color1 {
+    background: lightgreen;
+    color: black;
+}
+aside {
+    background: rgb(233, 7, 7);
+    color: black;
+}
+footer {
+    background: darkgrey;
+    color: white;
+}

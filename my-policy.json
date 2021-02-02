@@ -1,0 +1,23 @@
+{
+    "Version": "2012-10-17",
+    "Statement": [
+      {
+        "Effect": "Allow",
+        "Action": "ec2-instance-connect:SendSSHPublicKey",
+        "Resource": [
+            "arn:aws:ec2:region:amzn-ami-hvm-2018.03.0.20200918.0-x86_64-gp2:instance/i-07c67b509eb257790",
+            "arn:aws:ec2:region:amzn-ami-hvm-2018.03.0.20200918.0-x86_64-gp2:instance/i-07c67b509eb257790"
+        ],
+        "Condition": {
+            "StringEquals": {
+                "ec2:osuser": "ec2-user"
+            }
+        }
+      },
+      {
+        "Effect": "Allow",
+        "Action": "ec2:DescribeInstances",
+        "Resource": "*"
+      }
+    ]
+}
