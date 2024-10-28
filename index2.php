@@ -1,86 +1,83 @@
 <?php
 
+// Import PHPMailer classes into the global namespace
+// These must be at the top of your script, not inside a function
+use PHPMailer\PHPMailer\PHPMailer;
+use PHPMailer\PHPMailer\Exception;
 
-  // Import PHPMailer classes into the global namespace
-  // These must be at the top of your script, not inside a function
-  use PHPMailer\PHPMailer\PHPMailer;
-  use PHPMailer\PHPMailer\Exception;
-  
-  // If necessary, modify the path in the require statement below to refer to the
-  // location of your Composer autoload.php file.
-  require 'vendor/autoload.php';
-  
-  // Replace sender@example.com with your "From" address.
-  // This address must be verified with Amazon SES.
-  $sender = 'diegorodriguezgalindez@gmail.com';
-  $senderName = 'Sender Name';
-  
-  // Replace recipient@example.com with a "To" address. If your account
-  // is still in the sandbox, this address must be verified.
-  $recipient = 'diegorodriguezgalindez@gmail.com';
-  
-  // Replace smtp_username with your Amazon SES SMTP user name.
-  $usernameSmtp = 'AKIAYVIVT6BEJNP2GDVR';
-  
-  // Replace smtp_password with your Amazon SES SMTP password.
-  $passwordSmtp = 'BJZr2kFF1FiRFGBcDq0oPI3dDRLsTH88pvTNYk8LDqTL';
-  
-  // Specify a configuration set. If you do not want to use a configuration
-  // set, comment or remove the next line.
-  $configurationSet = 'ConfigSet';
-  
-  // If you're using Amazon SES in a region other than US West (Oregon),
-  // replace email-smtp.us-west-2.amazonaws.com with the Amazon SES SMTP
-  // endpoint in the appropriate region.
-  $host = 'email-smtp.eu-west-3.amazonaws.com';
-  $port = 587;
-  
-  // The subject line of the email
-  $subject = 'Amazon SES test (SMTP interface accessed using PHP)';
-  
-  // The plain-text body of the email
-  $bodyText =  "Email Test\r\nThis email was sent through the
-      Amazon SES SMTP interface using the PHPMailer class.";
-  
-  // The HTML-formatted body of the email
-  $bodyHtml = '<h1>Email Test</h1>
-      <p>This email was sent through the
-      <a href="https://aws.amazon.com/ses">Amazon SES</a> SMTP
-      interface using the <a href="https://github.com/PHPMailer/PHPMailer">
-      PHPMailer</a> class.</p>';
-  
-  $mail = new PHPMailer(true);
-  
-  try {
-      // Specify the SMTP settings.
-      $mail->isSMTP();
-      $mail->setFrom($sender, $senderName);
-      $mail->Username   = $usernameSmtp;
-      $mail->Password   = $passwordSmtp;
-      $mail->Host       = $host;
-      $mail->Port       = $port;
-      $mail->SMTPAuth   = true;
-      $mail->SMTPSecure = 'tls';
-      $mail->addCustomHeader('X-SES-CONFIGURATION-SET', $configurationSet);
-  
-      // Specify the message recipients.
-      $mail->addAddress($recipient);
-      // You can also add CC, BCC, and additional To recipients here.
-  
-      // Specify the content of the message.
-      $mail->isHTML(true);
-      $mail->Subject    = $subject;
-      $mail->Body       = $bodyHtml;
-      $mail->AltBody    = $bodyText;
-      $mail->Send();
-      echo "Email sent!" , PHP_EOL;
-  } catch (phpmailerException $e) {
-      echo "An error occurred. {$e->errorMessage()}", PHP_EOL; //Catch errors from PHPMailer.
-  } catch (Exception $e) {
-      echo "Email not sent. {$mail->ErrorInfo}", PHP_EOL; //Catch errors from Amazon SES.
-  }
-  
-  
+// If necessary, modify the path in the require statement below to refer to the
+// location of your Composer autoload.php file.
+require '../../../../home/bitnami/vendor/autoload.php';
+
+// Replace sender@example.com with your "From" address.
+// This address must be verified with Amazon SES.
+$sender = 'diegorodriguezgalindez@gmail.com';
+$senderName = 'Sender Name';
+
+// Replace recipient@example.com with a "To" address. If your account
+// is still in the sandbox, this address must be verified.
+$recipient = 'diegorodriguezgalindez@gmail.com';
+
+// Replace smtp_username with your Amazon SES SMTP user name.
+$usernameSmtp = 'AKIAYVIVT6BEJNP2GDVR';
+
+// Replace smtp_password with your Amazon SES SMTP password.
+$passwordSmtp = 'BJZr2kFF1FiRFGBcDq0oPI3dDRLsTH88pvTNYk8LDqTL';
+
+// Specify a configuration set. If you do not want to use a configuration
+// set, comment or remove the next line.
+//$configurationSet = 'ConfigSet';
+
+// If you're using Amazon SES in a region other than US West (Oregon),
+// replace email-smtp.us-west-2.amazonaws.com with the Amazon SES SMTP
+// endpoint in the appropriate region.
+$host = 'email-smtp.eu-west-3.amazonaws.com';
+$port = 587;
+
+// The subject line of the email
+$subject = 'Amazon SES test (SMTP interface accessed using PHP)';
+
+// The plain-text body of the email
+$bodyText =  "Email Test\r\nThis email was sent through the
+    Amazon SES SMTP interface using the PHPMailer class.";
+
+// The HTML-formatted body of the email
+$bodyHtml = '<h1>Email from Eventario</h1><p>
+    '.$_POST['email_cliente'].' this email was introduced in Eventario
+    </p>';
+
+    $mail = new PHPMailer(true);
+
+    try {
+        // Specify the SMTP settings.
+        $mail->isSMTP();
+        $mail->setFrom($sender, $senderName);
+        $mail->Username   = $usernameSmtp;
+        $mail->Password   = $passwordSmtp;
+        $mail->Host       = $host;
+        $mail->Port       = $port;
+        $mail->SMTPAuth   = true;
+        $mail->SMTPSecure = 'tls';
+        $mail->addCustomHeader('X-SES-CONFIGURATION-SET', $configurationSet);
+    
+        // Specify the message recipients.
+        $mail->addAddress($recipient);
+        // You can also add CC, BCC, and additional To recipients here.
+    
+        // Specify the content of the message.
+        $mail->isHTML(true);
+        $mail->Subject    = $subject;
+        $mail->Body       = $bodyHtml;
+        $mail->AltBody    = $bodyText;
+        $mail->Send();
+        $envio_exitoso = 'exito';
+       // echo "Email sent!" , PHP_EOL;
+    } catch (phpmailerException $e) {
+       // echo "An error occurred. {$e->errorMessage()}", PHP_EOL; //Catch errors from PHPMailer.
+    } catch (Exception $e) {
+        $envio_error = 'fracaso';
+       // echo "Email not sent. {$mail->ErrorInfo}", PHP_EOL; //Catch errors from Amazon SES.
+    }
   
   
 ?>
@@ -96,8 +93,13 @@
 
   <title>Eventario</title>
 
+    
+
   <!-- Bootstrap core CSS -->
   <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+
+  <!-- Custom styles for this toast -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
 
   <!-- Custom fonts for this template -->
   <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet">
@@ -106,6 +108,7 @@
 
   <!-- Custom styles for this template -->
   <link href="css/landing-page.min.css" rel="stylesheet">
+
 
 </head>
 
@@ -118,7 +121,7 @@
       <a class="btn btn-primary" href="https://eventarioapp.com/public/index.php">Inicia sesión</a>
     </div>
   </nav>
-
+  
   <!-- Masthead -->
   <header class="masthead text-white text-center">
     <div class="overlay"></div>
@@ -245,7 +248,7 @@
           <h2 class="mb-4">Empezamos? Regístrate ahora!</h2>
         </div>
         <div class="col-md-10 col-lg-8 col-xl-7 mx-auto">
-          <form action="/index.php" method="post">
+          <form action="/index2.php" method="post">
             <div class="form-row">
               <div class="col-12 col-md-9 mb-2 mb-md-0">
                 <input type="email" class="form-control form-control-lg" name="email_cliente" placeholder="Ingresa tu email...">
@@ -310,6 +313,18 @@
   <!-- Bootstrap core JavaScript -->
   <script src="vendor/jquery/jquery.min.js"></script>
   <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
+
+  <?php if (isset($envio_exitoso)) : ?> 
+    <script>
+        toastr.success('!Correo recibido! Recibirá información de los pasos a seguir.');
+    </script>
+  <?php elseif (isset($envio_error)) : ?>  
+    <script>
+        toastr.error('Error en el registro.Por favor intente más tarde');
+  </script> 
+   <?php endif ?> 
+ 
 
 </body>
 

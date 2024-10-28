@@ -1,32 +1,5 @@
 <?php
-      //Compruebo que la variable con el email del cliente existe y envio el email
-      // if (isset($_POST['email_cliente'])) {
-      //      ini_set( 'display_errors', 1 ); # REMOVE // FOR DEBUG
-      //     error_reporting( E_ALL ); # REMOVE // FOR DEBUG
-      //       $from= 'diegorodriguezgalindez@gmail.com';
-      //       $to= 'diegorodriguezgalindez@gmail.com';
-      //       $subject = 'Nueva solicitud';
-      //       $message = $_POST['email_cliente']."\r\n";
-      //       $fromName = "RPF-WEB";
-
-      //       /* Creamos las cabeceras del Email */
-      //           $headers = "Organization: RPF WEB\r\n";
-      //           $headers .= "From: " . $fromName . "<" . $from . ">\r\n";
-      //           $headers .= "Reply-To: " . $to . "\r\n";
-      //           $headers .= "Return-Path: " . $to . "\r\n";
-      //           $headers .= "MIME-Version: 1.0\r\n";
-      //           $headers .= "Content-type: text/plain; charset=iso-8859-1\r\n";
-      //           $headers .= "X-Priority: 3\r\n";
-      //           $headers .= "X-Mailer: PHP". phpversion() ."\r\n";
-
-      //       /* Enviamos el Formulario*/
-      //         if (mail('diegorodriguezgalindez@gmail.com', 'mi titulo', 'mensaje')) {
-      //           echo "<center><h2>El E-Mail se ha enviado correctamente!</h2></center>";
-      //          } else {
-      //           echo "<center><h2>Ops ! El E-Mail ha fallado!</h2></center>";
-      //         }
-      // }
-
+ 
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -72,10 +45,10 @@
           <h1 class="mb-5">La herramienta más simple para controlar tu inventario de manera digital.</h1>
         </div>
         <div class="col-md-10 col-lg-8 col-xl-7 mx-auto">
-          <form>
+          <form action="/index2.php" method="post"> 
             <div class="form-row">
               <div class="col-12 col-md-9 mb-2 mb-md-0">
-                <input type="email" class="form-control form-control-lg" placeholder="Introduce tu email...">
+                <input type="email" class="form-control form-control-lg" name="email_cliente" placeholder="Ingresa tu email..." required>
               </div>
               <div class="col-12 col-md-3">
                 <button type="submit" class="btn btn-block btn-lg btn-primary">Registrate!</button>
@@ -189,10 +162,10 @@
           <h2 class="mb-4">Empezamos? Regístrate ahora!</h2>
         </div>
         <div class="col-md-10 col-lg-8 col-xl-7 mx-auto">
-          <form action="/index.php" method="post">
+          <form action="/index2.php" method="post">
             <div class="form-row">
               <div class="col-12 col-md-9 mb-2 mb-md-0">
-                <input type="email" class="form-control form-control-lg" name="email_cliente" placeholder="Ingresa tu email...">
+                <input type="email" class="form-control form-control-lg" name="email_cliente" placeholder="Ingresa tu email..." required>
               </div>
               <div class="col-12 col-md-3">
                 <button type="submit" class="btn btn-block btn-lg btn-primary">Registrarse!</button>
@@ -211,7 +184,7 @@
         <div class="col-lg-6 h-100 text-center text-lg-left my-auto">
           <ul class="list-inline mb-2">
             <li class="list-inline-item">
-              <a href="#">Sobre nosotros</a>
+              <a href="about.php">Sobre nosotros</a>
             </li>
             <li class="list-inline-item">&sdot;</li>
             <li class="list-inline-item">
